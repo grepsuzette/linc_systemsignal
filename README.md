@@ -1,6 +1,6 @@
 # linc_signal
 
-Allow system signal trapping (signal.h) from [Haxe][https://www.haxe.org] (cpp target). 
+Allow system signal trapping (signal.h) from [Haxe](https://www.haxe.org) (cpp target). 
 
 Example:
 
@@ -23,4 +23,4 @@ class Test {
 
 For this very early version you can just ignore signals (which we call `trap()`).  It is not yet possible to define a handler.
 
-Thanks to [Linc][http://snowkit.github.io/linc/]'s author.
+Thanks to [Linc](http://snowkit.github.io/linc/)'s author.
