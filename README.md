@@ -1,6 +1,6 @@
 # linc_signal
 
-Allows system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
+Allows C99 system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
 
 This Haxe [Linc](http://snowkit.github.io/linc/) library deals with system signals (on most platforms, Linux, OSX, Windows, POSIX-compatible), through 3 simple methods demonstrated below:
 
@@ -12,15 +12,19 @@ This Haxe [Linc](http://snowkit.github.io/linc/) library deals with system signa
 
 They are defined in linc_systemsignal.Sig as such:
 
-* "SIGKILL" is Sig.KILL (usually maps to 9)
-* "SIGUSR1" is Sig.USR1
-* "SIGINT" is Sig.INT
-* "SIGCHLD" is Sig.CHLD
-* and so on (there is no exception to this naming scheme).
+* `Sig.KILL` for "SIGKILL" (usually mapped to 9)
+* `Sig.USR1` for "SIGUSR1" 
+* `Sig.INT` for "SIGINT"
+* `Sig.CHLD` for "SIGCHLD" 
+* and so on.
+
+There are no exceptions to this naming scheme.
 
 ## Ignore system signals
 
-Suppose we need to prevent the user from interrupting the program using CTRL-C. We must therefore inhibit SIGINT:
+Suppose user must be prevented from interrupting with CTRL-C. 
+
+This can be achieved by ignoring SIGINT:
 
 ```haxe
 import linc_systemsignal.SystemSignal;
@@ -39,11 +43,9 @@ class Test {
 }
 ```
 
-`ignore()` may be cancelled with `reset()`, which will reset default system implementation for this signal.
-
 ## Set system signal handler
 
-Sometimes it is not enough to just ignore a signal, we may need a *specific action*, i.e. a callback as here: 
+Sometimes it is not enough to just ignore a signal, callbacks may be used also: 
 
 ```haxe
 import linc_systemsignal.SystemSignal;
@@ -66,14 +68,13 @@ class Test {
 ```
 
 Calling this repeatedly for one specific signal will overwrite previous callback each time.
-It may be cancelled again with `reset()`.
 
 ## Resetting
 
-`SystemSignal.reset(Sig.INT);` would restore ability to break using Ctrl-C in the two previous examples. Calling this restores the OS default behaviour for the specified signal.
+To stop ignoring or specific actions (callback), the OS default handler for a specific signal may be restored using `SystemSignal.reset(<signal_number>);`
 
 ## How to install
 
-You just need to `haxelib git` this library, and target CPP with a `-lib linc_signal`.
+You just need to `haxelib git` this repo, and target CPP with a `-lib linc_signal`.
 
 Thanks to [Linc](http://snowkit.github.io/linc/).
