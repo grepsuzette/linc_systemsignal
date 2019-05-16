@@ -1,6 +1,6 @@
 # linc_signal
 
-Allows C99 system signal trapping (signal.h) right from [Haxe][https://www.haxe.org] (cpp target). 
+Allows C99 system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
 
 The library is ridiculously simple right now, as it only has 3 methods:
 
@@ -16,7 +16,7 @@ Since all signal names begin by "SIG", we chose to call names as follows, note a
 * Sig.USR1 is SIGUSR1
 * Sig.INT is SIGINT
 * Sig.CHLD is SIGCHLD
-* et cetera.
+* ...
 
 ## Ignore system signals
 
@@ -72,4 +72,4 @@ It may be cancelled with `reset()`.
 
 `SystemSignal.reset(Sig.INT);` would restore ability to break using Ctrl-C in the previous example. Calling this restores the OS default behaviour for the specified signal.
 
-Thanks to [Linc][http://snowkit.github.io/linc/]'s author.
+Thanks to [Linc](http://snowkit.github.io/linc/)'s author.
