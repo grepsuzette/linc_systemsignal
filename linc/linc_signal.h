@@ -12,9 +12,9 @@
 namespace linc {
 
     namespace ns_signal {
-        void _trap(int sig);
-        void _resetDefault(int sig);
-        void _setHandler(int sig, void (*handler)(int));
+        void _ignore(int sig);
+        void _reset(int sig);
+        void _on(int sig, void (*handler)(int));
     }
 
 } //linc

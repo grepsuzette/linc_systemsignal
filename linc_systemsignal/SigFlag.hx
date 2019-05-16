@@ -1,10 +1,10 @@
-package linc_signal;
+package linc_systemsignal;
 
-#if false
 /**
  * Unused as of now. Maybe useful one day...
  * See help in `man sigaction`, search for `sa_flags`.
  */
+#if false
 enum SigFlag {
        
     NoChildStop;  // SA_NOCLDSTOP  Do not generate SIGCHLD when  children  stop  or  stopped children continue.

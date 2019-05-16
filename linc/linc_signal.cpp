@@ -6,15 +6,15 @@ namespace linc {
 
     namespace ns_signal {
 
-        void _trap(int sig) {
+        void _ignore(int sig) {
             ::signal(sig, SIG_IGN);
         }
 
-        void _resetDefault(int sig) {
+        void _reset(int sig) {
             ::signal(sig, SIG_DFL);
         }
 
-        void _setHandler(int sig, void (*handler)(int)) {
+        void _on(int sig, void (*handler)(int)) {
             ::signal(sig, handler);
         }
     } 

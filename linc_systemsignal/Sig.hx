@@ -1,6 +1,6 @@
-package haxe_signal;
+package linc_systemsignal;
 
-import haxe_signal.SigNum;
+import linc_systemsignal.SigNum;
 
 /**
  * Defined in signal.h.
@@ -9,10 +9,10 @@ import haxe_signal.SigNum;
 @:include("signal.h")
 extern class Sig {
 
-    @:native("SIG_ERR"   ) public static var _ERR   : SigNum;
-    @:native("SIG_DFL"   ) public static var _DFL   : SigNum;
-    @:native("SIG_IGN"   ) public static var _IGN   : SigNum;
-    @:native("SIG_HOLD"  ) public static var _HOLD  : SigNum;
+    @:native("SIG_ERR"   ) public static var _ERR   : SigNum;   // special: error
+    @:native("SIG_DFL"   ) public static var _DFL   : SigNum;   // special: default handler
+    @:native("SIG_IGN"   ) public static var _IGN   : SigNum;   // special: ignore
+    @:native("SIG_HOLD"  ) public static var _HOLD  : SigNum;   // special
     @:native("SIGINT"    ) public static var INT    : SigNum;
     @:native("SIGILL"    ) public static var ILL    : SigNum;
     @:native("SIGABRT"   ) public static var ABRT   : SigNum;
@@ -46,6 +46,6 @@ extern class Sig {
     @:native("SIGPOLL"   ) public static var POLL   : SigNum;
     @:native("SIGSYS"    ) public static var SYS    : SigNum;
     @:native("SIGRTMAX"  ) public static var RTMAX  : SigNum;
-    @:native("_NSIG"     ) public static var _NSIG  : SigNum;
+    @:native("_NSIG"     ) public static var _NSIG  : SigNum;   // number of signals
 
 }
