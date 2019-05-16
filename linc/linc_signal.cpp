@@ -9,6 +9,14 @@ namespace linc {
         void _trap(int sig) {
             ::signal(sig, SIG_IGN);
         }
+
+        void _resetDefault(int sig) {
+            ::signal(sig, SIG_DFL);
+        }
+
+        void _setHandler(int sig, void (*handler)(int)) {
+            ::signal(sig, handler);
+        }
     } 
 
 } //linc
