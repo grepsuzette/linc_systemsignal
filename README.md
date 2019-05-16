@@ -1,26 +1,26 @@
 # linc_signal
 
-Allows C99 system signal trapping (signal.h) right from [Haxe][https://www.haxe.org] (cpp target). 
+Allows system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
 
-The library is ridiculously simple right now, as it only has 3 methods:
+This Haxe [Linc](http://snowkit.github.io/linc/) library deals with system signals (on most platforms, Linux, OSX, Windows, POSIX-compatible), through 3 simple methods demonstrated below:
 
-1. `SystemSignal.ignore(Int)`
-2. `SystemSignal.on(Int, Int->Void)`
-3. `SystemSignal.reset(Int)`
+1. `SystemSignal.ignore(signum:Int)`
+2. `SystemSignal.on(signum:Int, cb:Int->Void)`
+3. `SystemSignal.reset(signum:Int)`
 
-The other important file is linc_systemsignal.Sig, which contains the signal numbers compiled for the platform. 
+## Signal names
 
-Since all signal names begin by "SIG", we chose to call names as follows, note all of those are Integers:
+They are defined in linc_systemsignal.Sig as such:
 
-* Sig.KILL is SIGKILL (is usually 9)
-* Sig.USR1 is SIGUSR1
-* Sig.INT is SIGINT
-* Sig.CHLD is SIGCHLD
-* et cetera.
+* "SIGKILL" is Sig.KILL (usually maps to 9)
+* "SIGUSR1" is Sig.USR1
+* "SIGINT" is Sig.INT
+* "SIGCHLD" is Sig.CHLD
+* and so on (there is no exception to this naming scheme).
 
 ## Ignore system signals
 
-For example to prevent CTRL-C, we must ignore SIGINT:
+Suppose we need to prevent the user from interrupting the program using CTRL-C. We must therefore inhibit SIGINT:
 
 ```haxe
 import linc_systemsignal.SystemSignal;
@@ -28,7 +28,7 @@ import linc_systemsignal.Sig;
 
 class Test {
     static function main() {
-        SystemSignal.ignore(Sig.INT);   // ignore SIGINT
+        SystemSignal.ignore(Sig.INT);   // inhibit SIGINT
         while (true) {
             trace("Sleeping 5 seconds. I can not be quit with Ctrl-C!");
             Sys.sleep(5);
@@ -39,11 +39,11 @@ class Test {
 }
 ```
 
-It may be cancelled with `reset()`.
+`ignore()` may be cancelled with `reset()`, which will reset default system implementation for this signal.
 
 ## Set system signal handler
 
-Instead of ignoring a signal, you may handle it using a simple callback:
+Sometimes it is not enough to just ignore a signal, we may need a *specific action*, i.e. a callback as here: 
 
 ```haxe
 import linc_systemsignal.SystemSignal;
@@ -66,10 +66,14 @@ class Test {
 ```
 
 Calling this repeatedly for one specific signal will overwrite previous callback each time.
-It may be cancelled with `reset()`.
+It may be cancelled again with `reset()`.
 
 ## Resetting
 
-`SystemSignal.reset(Sig.INT);` would restore ability to break using Ctrl-C in the previous example. Calling this restores the OS default behaviour for the specified signal.
+`SystemSignal.reset(Sig.INT);` would restore ability to break using Ctrl-C in the two previous examples. Calling this restores the OS default behaviour for the specified signal.
 
-Thanks to [Linc][http://snowkit.github.io/linc/]'s author.
+## How to install
+
+You just need to `haxelib git` this library, and target CPP with a `-lib linc_signal`.
+
+Thanks to [Linc](http://snowkit.github.io/linc/).
