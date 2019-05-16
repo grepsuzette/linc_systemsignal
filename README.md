@@ -1,6 +1,6 @@
 # linc_signal
 
-Allows system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
+Allows C99 system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
 
 This Haxe [Linc](http://snowkit.github.io/linc/) library deals with system signals (on most platforms, Linux, OSX, Windows, POSIX-compatible), through 3 simple methods demonstrated below:
 
@@ -16,7 +16,7 @@ They are defined in linc_systemsignal.Sig as such:
 * "SIGUSR1" is Sig.USR1
 * "SIGINT" is Sig.INT
 * "SIGCHLD" is Sig.CHLD
-* and so on (there is no exception to this naming scheme).
+* and so on (there is no exception).
 
 ## Ignore system signals
 
