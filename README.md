@@ -1,4 +1,4 @@
-# linc_signal
+# linc_systemsignal
 
 Allows C99 system signal trapping (signal.h) right from [Haxe](https://www.haxe.org) (cpp target). 
 
