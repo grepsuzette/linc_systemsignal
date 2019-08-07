@@ -49,7 +49,7 @@ class SystemSignal {
 
 
     static function _onsignal(n:Int) : Void {
-        if (_map.exists(n)) _map[n](n);
+        if (_map != null && _map.exists(n)) _map[n](n);
     }
 
 }
