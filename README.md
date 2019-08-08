@@ -12,11 +12,12 @@ This Haxe [Linc](http://snowkit.github.io/linc/) library deals with system signa
 
 They are defined in linc_systemsignal.Sig as such:
 
-* `Sig.KILL` for "SIGKILL" (usually mapped to 9)
+* `Sig.TERM` for "SIGTERM" (usually mapped to 15)
 * `Sig.USR1` for "SIGUSR1" 
-* `Sig.INT` for "SIGINT"
+* `Sig.INT` for "SIGINT" (e.g. ctrl-C)
+* `Sig.STOP` for "SIGSTOP" (e.g. ctrl-Z)
 * `Sig.CHLD` for "SIGCHLD" 
-* and so on.
+* and so on. Note SIGKILL is useless to map, as the system never sends this signal to the process.
 
 There are no exceptions to this naming scheme.
 
