@@ -44,6 +44,9 @@ class SystemSignal {
      */
     public static function on(signum:SigNum, cb:SigNum->Void) : Void {
         _map.set(signum, cb);
+        // TODO to debug
+        // trace("In SystemSignal.on(cb) is disabled for now as of August 09, 2019 ");
+        // ExternSignal._on( signum, cpp.Function.fromStaticFunction(_onsignal) );
         ExternSignal._on( signum, cpp.Function.fromStaticFunction(_onsignal) );
     }
 

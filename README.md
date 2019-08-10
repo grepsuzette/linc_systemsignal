@@ -70,6 +70,23 @@ class Test {
 
 Calling this repeatedly for one specific signal will overwrite previous callback each time.
 
+However beware when using several threads that it does not create problems with the garbage collector.
+In some instances you can't allocate anything from those callbacks, not even haxe Strings.
+In those cases you have to resort to tricks like below:
+
+```haxe
+SystemSignal.on(Sig.INT, function(signum:Int) {
+    if (++nTimes < 3) { untyped __cpp__('printf("Ctrl-C pressed %d times...\\n", nTimes);'); }
+    else {
+        untyped __cpp__('printf(" ...And a third time -> Quit!\\n");');
+        nExit = 1;          // with a while (nExit == 0)  in the code. Int won't get allocated, so this won't create errors.
+    }
+});
+```
+In those cases, I found `cpp.vm.Gc.enterGcFreeZone()` didn't help at all. I think it's because the top of 
+the calling thread has to be known to the GC. But unfortunately my knowledge on this so shallow I have
+no clue how to achieve this. If you understand more about what's happening don't hesitate to open a bug so I modify this doc!
+
 ## Resetting
 
 To stop ignoring or specific actions (callback), the OS default handler for a specific signal may be restored using `SystemSignal.reset(<signal_number>);`
